@@ -4,8 +4,6 @@ var path = require("path");
 const data = require ("./data-service.js");
 app.use(express.static('public'));
 
-app.use(express.static('public'));
-
 var HTTP_PORT = process.env.PORT || 8080;
 
 
