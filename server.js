@@ -30,13 +30,17 @@ app.get("/employees",(req,res)=>{
 app.get("/managers",(req,res)=>{
     data.getManagers().then((data)=>{
         res.json(data);
-    })
+    }).catch((err)=>{
+        res.json(err)
+    });
 });
 
 app.get("/departments",(req,res)=>{
     data.getDepartments().then((data)=>{
         res.json(data);
-    })
+    }).catch((err)=>{
+        res.json(err)
+    });
 });
 
 app.use((req,res)=>{
