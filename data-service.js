@@ -40,17 +40,17 @@ module.exports.getDepartments = function(){
 
 }
 
-module.exports.getManagers = functions() {
+module.exports.getManagers = function() {
     return new Promise((resolve, reject) => {
         var manager = [];
-        for(let i=0; i<employees.length;i++){
+        for(let i=0; i< employees.length; i++){
             if(employees[i].isManager == true){
                 manager.push(employees[i]);
             }
-        }
+        };
         if (manager.length == 0) {
             reject("no results returned");
-        }
+        };
         resolve(manager);
-    });
+    })
 }
