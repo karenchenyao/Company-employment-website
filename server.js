@@ -44,7 +44,7 @@ app.get("/departments",(req,res)=>{
 });
 
 app.use((req,res)=>{
-    res.status(404).send("Pages Not Found");
+    res.status(404).sendFile("/view/404.html");
 });
 
 data.initialize().then(function(){
