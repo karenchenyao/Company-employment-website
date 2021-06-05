@@ -42,7 +42,7 @@ app.get("/departments",(req,res)=>{
 });
 
 app.use((req,res)=>{
-    res.status(404).send("Pages does not exist");
+    res.status(404).send("Pages Not Found");
 });
 
 data.initialize().then(function(){
