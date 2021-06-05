@@ -22,21 +22,23 @@ app.get("/about", function(req,res){
 });
 
 app.get("/employees",(req,res)=>{
-    data.getAllEmployees().then(data)=>{
+    data.getAllEmployees().then((data)=>{
         res.json(data);
-    }
+    }).catch((err){
+        res.json(err)
+    });
 });
 
 app.get("/managers",(req,res)=>{
-    data.getManagers().then(data)=>{
+    data.getManagers().then((data)=>{
         res.json(data);
-    }
+    })
 });
 
 app.get("/departments",(req,res)=>{
-    data.getDepartments().then(data)=>{
+    data.getDepartments().then((data)=>{
         res.json(data);
-    }
+    })
 });
 
 app.use((req,res)=>{
