@@ -21,28 +21,24 @@ app.get("/about", function(req,res){
     res.sendFile(path.join(__dirname, "/views/about.html"))
 });
 
-app.get("/employees",(req,res){
+app.get("/employees",(req,res)=>{
     data.getAllEmployees().then(data)=>{
         res.json(data);
-    }.catch((err)=>{
+    }.catch(err){
         res.json(err);
-    });
+    };
 });
 
-app.get("/managers",(req,res){
+app.get("/managers",(req,res)=>{
     data.getManagers().then(data)=>{
         res.json(data);
-    }.catch((err)=>{
-        res.json(err);
-    });
+    }
 });
 
-app.get("/departments",(req,res){
+app.get("/departments",(req,res)=>{
     data.getDepartments().then(data)=>{
         res.json(data);
-    }.catch((err)=>{
-        res.json(err);
-    });
+    }
 });
 
 app.use((req,res)=>{
