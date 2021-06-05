@@ -44,7 +44,7 @@ app.get("/departments",(req,res)=>{
 });
 
 app.use((req,res)=>{
-    res.status(404).sendFile(path.join(__dirname, "/view/404.html");
+    res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
 });
 
 data.initialize().then(function(){
