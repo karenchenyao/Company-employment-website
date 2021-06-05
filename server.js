@@ -24,9 +24,7 @@ app.get("/about", function(req,res){
 app.get("/employees",(req,res)=>{
     data.getAllEmployees().then(data)=>{
         res.json(data);
-    }.catch(err){
-        res.json(err);
-    };
+    }
 });
 
 app.get("/managers",(req,res)=>{
