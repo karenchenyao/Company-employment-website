@@ -43,6 +43,14 @@ app.get("/departments",(req,res)=>{
     });
 });
 
+app.get("/employees/add",(req,res)=>{
+    res.sendFile(path.join(_dirname,"/views/addEmployee.html"))
+});
+
+app.get("/images/add",(req,res)=>{
+    res.sendFile(path.join(_dirname,"/views/addImages.html"))
+});
+
 app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
 });
