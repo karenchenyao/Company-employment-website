@@ -54,3 +54,16 @@ module.exports.getManagers = function() {
         resolve(manager);
     })
 }
+
+module.exports.addEmployee = function(employeeData){
+    return new Promise(function(resolve,reject){
+        employeeData.isManager = (employeeData.isManager == null)? false : true;
+        employeeData.employeeNum = employees.length + 1;
+        employees.push(employeeData);
+        resolve();
+        if(!employeeData){
+            reject("No data to be added")
+        }
+    });
+
+}

@@ -1,9 +1,10 @@
 var express = require ("express");
 var app = express();
 var path = require("path");
-var multer = require("multer");
+const multer = require("multer");
 const fs = require ("fs");
 const data = require ("./data-service.js");
+const bodyParse = require('body-parser');
 app.use(express.static('public'));
 
 var HTTP_PORT = process.env.PORT || 8080;
@@ -77,6 +78,16 @@ app.post("/images/add", (req,res) => {
     upload.single("imageFile").then(() => {
         res.redirect("/images");
     });
+});
+
+app.post("/employees/add", (req,res)=>{
+    data.addEmployee(req.body).then(()=>{
+        res.redirect("/employees");
+    });
+});
+
+app.use((req,res)=>{
+    res.bodyParse.urlencoded({extended:true})
 });
 
 app.use((req,res)=>{
