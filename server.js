@@ -5,10 +5,10 @@ const multer = require("multer");
 const fs = require ("fs");
 const data = require ("./data-service.js");
 const bodyParse = require('body-parser');
+const upload = multer({storage:storage});
 app.use(express.static('public'));
-app.use(express.urlencoded({extended:true}));
+app.use(bodyParse.urlencoded({extended:true}));
 
-var upload = multer({storage:storage});
 
 var HTTP_PORT = process.env.PORT || 8080;
 
@@ -24,7 +24,6 @@ var storage = multer.diskStorage({
     }
 
 });
-
 
 app.get("/", function(req,res){
     res.sendFile(path.join(__dirname, "/views/home.html"))
