@@ -8,6 +8,8 @@ const bodyParse = require('body-parser');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 
+var upload = multer({storage:storage});
+
 var HTTP_PORT = process.env.PORT || 8080;
 
 
@@ -23,7 +25,6 @@ var storage = multer.diskStorage({
 
 });
 
-var upload = multer({storage:storage});
 
 app.get("/", function(req,res){
     res.sendFile(path.join(__dirname, "/views/home.html"))
