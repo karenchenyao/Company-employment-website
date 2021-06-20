@@ -17,7 +17,7 @@ function onHTTPStart(){
     console.log("Express http server listening on PORT: " + HTTP_PORT);
 }
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: "./public/images/uploaded",
     filename: function(req,file,cb){
         cb(null,Date.now() + path.extname(file.originalname))    
