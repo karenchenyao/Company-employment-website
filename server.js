@@ -4,10 +4,10 @@ var path = require("path");
 const multer = require("multer");
 const fs = require ("fs");
 const data = require ("./data-service.js");
-const bodyParse = require('body-parser');
+const bodyParser = require('body-parser');
 const upload = multer({storage:storage});
 app.use(express.static('public'));
-app.use(bodyParse.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 
 var HTTP_PORT = process.env.PORT || 8080;
