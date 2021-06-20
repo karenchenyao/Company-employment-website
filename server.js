@@ -6,6 +6,7 @@ const fs = require ("fs");
 const data = require ("./data-service.js");
 const bodyParse = require('body-parser');
 app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}));
 
 var HTTP_PORT = process.env.PORT || 8080;
 
@@ -84,10 +85,6 @@ app.post("/employees/add", (req,res)=>{
     data.addEmployee(req.body).then(()=>{
         res.redirect("/employees");
     });
-});
-
-app.use((req,res)=>{
-    res.bodyParse.urlencoded({extended:true})
 });
 
 app.use((req,res)=>{
