@@ -1,6 +1,7 @@
 var express = require ("express");
 var app = express();
 var path = require("path");
+var multer = require("multer");
 const data = require ("./data-service.js");
 app.use(express.static('public'));
 
