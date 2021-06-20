@@ -59,11 +59,11 @@ app.get("/departments",(req,res)=>{
 });
 
 app.get("/employees/add",(req,res)=>{
-    res.sendFile(path.join(_dirname,"/views/addEmployee.html"))
+    res.sendFile(path.join(__dirname,"/views/addEmployee.html"))
 });
 
 app.get("/images/add",(req,res)=>{
-    res.sendFile(path.join(_dirname,"/views/addImage.html"))
+    res.sendFile(path.join(__dirname,"/views/addImage.html"))
 });
 
 app.get("/images", (req,res)=>{
