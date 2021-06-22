@@ -113,7 +113,7 @@ module.exports.getEmployeesByManager = function(manager){
     })
 }
 
-module.exports.getEmployeesByNum = function(num){
+module.exports.getEmployeeByNum = function(num){
     return new Promise(function(resolve,reject){
         var emp = {};
         for(let i=0; i < employees.length; i++){

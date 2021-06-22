@@ -35,34 +35,44 @@ app.get("/about", function(req,res){
 });
 
 app.get("/employees",(req,res)=>{
-    data.getAllEmployees().then((data)=>{
         if (req.query.status){
-            data.getEmployeesByStatus(status)
-            res.json(data)
+            data.getEmployeesByStatus(req.query.status).then((data)=>{
+                res.json(data)
+            }).catch((err)=>{
+                res.json({message:"no results"});
+            })
+            
         }
         else
         if (req.query.department){
-            data.getEmployeesByDepartment(department)
-            res.json(data)
+            data.getEmployeesByStatus(req.query.department).then((data)=>{
+                res.json(data)
+            }).catch((err)=>{
+                res.json({message:"no results"});
+            })
         }
         else
-        if (req.query.manager){
-            data.getEmployeesByManger(manager)
-            res.json(data)
+        if(req.query.employees){
+            data.getEmployeesByStatus(req.query.employees).then((data)=>{
+                res.json(data)
+            }).catch((err)=>{
+                res.json({message:"no results"});
+            })
         }
-        else
-        res.json(data);
-
-    }).catch((err)=>{
-        res.json(err)
-    });
+        else {
+            data.getAllEmployees().then((data)=>{
+                res.json(data);
+            }).catch((err)=>{
+                res.json({message:"no results"});
+            })
+        }
 });
 
-app.get("/employee/value",(req,res)=>{
-    data.getEmployeeByNum(req.query.value).then((data)=>{
+app.get("/employee/:empNum",(req,res)=>{
+    data.getEmployeeByNum(req.params.empNum).then((data)=>{
         res.json(data)
     }).catch((err)=>{
-        res.json(err)
+        res.json({message:"no results"})
     });
 })
 
