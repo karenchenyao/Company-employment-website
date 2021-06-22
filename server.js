@@ -36,11 +36,35 @@ app.get("/about", function(req,res){
 
 app.get("/employees",(req,res)=>{
     data.getAllEmployees().then((data)=>{
+        if (req.query.status){
+            data.getEmployeesByStatus(status)
+            res.json(data)
+        }
+        else
+        if (req.query.department){
+            data.getEmployeesByDepartment(department)
+            res.json(data)
+        }
+        else
+        if (req.query.manager){
+            data.getEmployeesByManger(manager)
+            res.json(data)
+        }
+        else
         res.json(data);
+
     }).catch((err)=>{
         res.json(err)
     });
 });
+
+app.get("/employee/value",(req,res)=>{
+    data.getEmployeeByNum(req.query.value).then((data)=>{
+        res.json(data)
+    }).catch((err)=>{
+        res.json(err)
+    });
+})
 
 app.get("/managers",(req,res)=>{
     data.getManagers().then((data)=>{
