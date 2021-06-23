@@ -1,3 +1,15 @@
+/*********************************************************************************
+* WEB322 – Assignment 03
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part 
+* of this assignment has been copied manually or electronically from any other source 
+* (including 3rd party web sites) or distributed to other students.
+* 
+* Name: __Yao Chen________ Student ID: ____134082197_________ Date: ____June 23 2021_______
+*
+* Online (Heroku) Link: ______https://ychen-569.herokuapp.com/___________________
+*
+********************************************************************************/
+
 var express = require ("express");
 var app = express();
 var path = require("path");
