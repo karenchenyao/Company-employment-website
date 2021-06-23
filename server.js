@@ -45,7 +45,7 @@ app.get("/employees",(req,res)=>{
         }
         else
         if (req.query.department){
-            data.getEmployeesByStatus(req.query.department).then((data)=>{
+            data.getEmployeesByDepartment(req.query.department).then((data)=>{
                 res.json(data)
             }).catch((err)=>{
                 res.json({message:"no results"});
@@ -53,7 +53,7 @@ app.get("/employees",(req,res)=>{
         }
         else
         if(req.query.employees){
-            data.getEmployeesByStatus(req.query.employees).then((data)=>{
+            data.getEmployeesByManager(req.query.employees).then((data)=>{
                 res.json(data)
             }).catch((err)=>{
                 res.json({message:"no results"});
@@ -63,7 +63,7 @@ app.get("/employees",(req,res)=>{
             data.getAllEmployees().then((data)=>{
                 res.json(data);
             }).catch((err)=>{
-                res.json({message:"no results"});
+                res.json({message:"wrong message"});
             })
         }
 });
