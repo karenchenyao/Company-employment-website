@@ -100,22 +100,16 @@ app.get("/images/add",(req,res)=>{
     res.sendFile(path.join(__dirname,"/views/addImage.html"))
 });
 
+app.post("/images/add", upload.single("imageFile"), (req,res) => {
+        res.redirect("/images");
+});
+
 app.get("/images", (req,res)=>{
-    var path = "./public/image/uploaded";
-    fs.readdir(path, (err,items)=>{
-        for (var i=0; i<items.length;i++){
-            var images="images" + ':'+ items[i];
-        }
-        res.json(images);
+    fs.readdir("./public/images/uploaded", (err,items)=>{
+        res.json({images:items});
     })
 
 })
-
-app.post("/images/add", (req,res) => {
-    upload.single("imageFile").then(() => {
-        res.redirect("/images");
-    });
-});
 
 
 app.post("/employees/add", (req,res)=>{
