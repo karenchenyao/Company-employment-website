@@ -110,11 +110,13 @@ app.get("/images", (req,res)=>{
     })
 
 })
+
 app.post("/images/add", (req,res) => {
     upload.single("imageFile").then(() => {
         res.redirect("/images");
     });
 });
+
 
 app.post("/employees/add", (req,res)=>{
     data.addEmployee(req.body).then(()=>{
