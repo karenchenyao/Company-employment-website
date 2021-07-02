@@ -17,9 +17,13 @@ const multer = require("multer");
 const fs = require ("fs");
 const data = require ("./data-service.js");
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}));
-
+app.engine(
+    '.hbs',exphbs({extname: '.hbs'})
+);
+app.set('view engine','.hbs');
 
 var HTTP_PORT = process.env.PORT || 8080;
 
