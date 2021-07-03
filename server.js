@@ -43,11 +43,11 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage});
 
 app.get("/", function(req,res){
-    res.sendFile(path.join(__dirname, "/views/home.html"))
+    res.render("home");
 });
 
 app.get("/about", function(req,res){
-    res.sendFile(path.join(__dirname, "/views/about.html"))
+    res.render("/about")
 });
 
 app.get("/employees",(req,res)=>{
@@ -109,11 +109,11 @@ app.get("/departments",(req,res)=>{
 });
 
 app.get("/employees/add",(req,res)=>{
-    res.sendFile(path.join(__dirname,"/views/addEmployee.html"))
+    res.render("/employees/add");
 });
 
 app.get("/images/add",(req,res)=>{
-    res.sendFile(path.join(__dirname,"/views/addImage.html"))
+    res.render("/images/add");
 });
 
 app.post("/images/add", upload.single("imageFile"), (req,res) => {
