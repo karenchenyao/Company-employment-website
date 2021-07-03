@@ -20,8 +20,27 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}));
-app.engine(
-    '.hbs',exphbs({extname: '.hbs'})
+app.engine('.hbs',exphbs({
+    extname: '.hbs',
+    helpers: {
+        navLink: function(url, options){
+            return '<li' + 
+            ((url == app.locals.activeRoute) ? ' class="active" ' : '') + 
+            '><a href="' + url + '">' + options.fn(this) + '</a></li>';
+        },
+        equal: function (lvalue, rvalue, options) {
+            if (arguments.length < 3)
+            throw new Error("Handlebars Helper equal needs 2 parameters");
+            if (lvalue != rvalue) {
+            return options.inverse(this);
+            } else {
+            return options.fn(this);
+            }
+        }
+
+    }
+})
+
 );
 app.set('view engine','.hbs');
 
@@ -42,12 +61,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage:storage});
 
+app.use(function(req,res,next){
+    let route = req.baseUrl + req.path;
+    app.locals.activeRoute = (route =="/")?"/":route.replace(/\/$/,"");
+    next();
+});
+   
+
 app.get("/", function(req,res){
     res.render("home");
 });
 
 app.get("/about", function(req,res){
-    res.render("/about")
+    res.render("about")
 });
 
 app.get("/employees",(req,res)=>{
@@ -109,11 +135,11 @@ app.get("/departments",(req,res)=>{
 });
 
 app.get("/employees/add",(req,res)=>{
-    res.render("/employees/add");
+    res.render("addEmployee");
 });
 
 app.get("/images/add",(req,res)=>{
-    res.render("/images/add");
+    res.render("addImage");
 });
 
 app.post("/images/add", upload.single("imageFile"), (req,res) => {
@@ -127,12 +153,14 @@ app.get("/images", (req,res)=>{
 
 })
 
-
 app.post("/employees/add", (req,res)=>{
     data.addEmployee(req.body).then(()=>{
         res.redirect("/employees");
     });
 });
+
+
+
 
 app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
