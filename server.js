@@ -79,42 +79,42 @@ app.get("/about", function(req,res){
 app.get("/employees",(req,res)=>{
         if (req.query.status){
             data.getEmployeesByStatus(req.query.status).then((data)=>{
-                res.json(data)
+                res.render("employees", {employees: data})
             }).catch((err)=>{
-                res.json({message:"no results"});
+                res.render({message:"no results"});
             })
             
         }
         else
         if (req.query.department){
             data.getEmployeesByDepartment(req.query.department).then((data)=>{
-                res.json(data)
+                res.render("employees", {employees: data})
             }).catch((err)=>{
-                res.json({message:"no results"});
+                res.render({message:"no results"});
             })
         }
         else
         if(req.query.employees){
             data.getEmployeesByManager(req.query.employees).then((data)=>{
-                res.json(data)
+                res.render("employees", {employees: data})
             }).catch((err)=>{
-                res.json({message:"no results"});
+                res.render({message:"no results"});
             })
         }
         else {
             data.getAllEmployees().then((data)=>{
-                res.json(data);
+                res.render("employees", {employees: data});
             }).catch((err)=>{
-                res.json({message:"wrong message"});
+                res.render({message:"no results"});
             })
         }
 });
 
 app.get("/employee/:empNum",(req,res)=>{
     data.getEmployeeByNum(req.params.empNum).then((data)=>{
-        res.json(data)
+        res.render("employee", {employee: data});
     }).catch((err)=>{
-        res.json({message:"no results"})
+        res.render({message:"no results"});
     });
 })
 
@@ -128,9 +128,9 @@ app.get("/managers",(req,res)=>{
 
 app.get("/departments",(req,res)=>{
     data.getDepartments().then((data)=>{
-        res.json(data);
+        res.render("departments", {departments: data});
     }).catch((err)=>{
-        res.json(err)
+        res.render({message: "no results"});
     });
 });
 
@@ -154,13 +154,16 @@ app.get("/images", (req,res)=>{
 })
 
 app.post("/employees/add", (req,res)=>{
-    data.addEmployee(req.body).then(()=>{
+        data.updateEmployee(req.body).then(()=>{
+            res.redirect("/employees");
+        })
+});
+
+app.post("/employee/update", (req, res) => {
+    data.updateEmployee(req.body).then(()=>{
         res.redirect("/employees");
     });
 });
-
-
-
 
 app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname, "/views/404.html"));

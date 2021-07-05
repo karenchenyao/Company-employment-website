@@ -1,0 +1,28 @@
+<div class="row">
+ <div class="col-md-12">
+ <h2>Employees</h2>
+ <hr />
+ <div class = "table-responsive">
+     <table class="table ">
+         <thead>
+             <tr>
+                 <th>Department&nbsp;Number</th>
+                 <th>Department&nbsp;Name</th>
+             </tr>
+         </thead>
+         <tbody>
+             {{#each departments}}
+             <tr>
+                 <td><a href = "/employees?department={{departmentId}}">{{departmentId}}</a></td>
+                 <td><a href = "/employees?department={{departmentId}}">{{departmentName}}</a></td>
+             </tr>
+             {{/each}}
+         </tbody>
+         {{#unless department}}
+         <strong>{{message}}</strong>
+         {{/unless}}
+     </table>
+
+ </div>
+ </div>
+</div>

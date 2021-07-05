@@ -127,3 +127,17 @@ module.exports.getEmployeeByNum = function(num){
         resolve(emp);   
     })
 }
+
+module.exports.updateEmployee = function(employeeData){
+    return new Promise(function(resolve,reject){
+        for(let i=0; i < employees.length; i++){
+            if(employees[i].employeeNum == employeeData.employeeNum){
+                employees[i].firstName = employeeData.firstName;
+            }
+        }
+        if (!employeeData){
+            reject("no results returned")
+        }
+        resolve();
+    })
+}
