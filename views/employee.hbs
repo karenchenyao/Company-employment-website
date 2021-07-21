@@ -78,7 +78,7 @@
                         <div class="form-group">
                             <label>Status:</label><br />
                             <label  class="checkbox-inline">
-                                <input type="radio" id="statusFT" name="status" {{#equal employee.status "Full Time"}} checked {{/equal}}/> Full Time
+                                <input type="radio" id="statusFT" name="status" value="Full Time" {{#equal employee.status "Full Time"}} checked {{/equal}}/> Full Time
                             </label>
                             <label class="checkbox-inline">
                                 <input type="radio" id="statusPT" name="status"  value="Part Time" /> Part Time
@@ -89,13 +89,13 @@
                         <div class="form-group">
                             <label for="department">Department</label>
                                 <select class="form-control" name="department" id="department">
-                                    <option {{#equal employee.department "1"}} >Creative Services{{/equal}}</option>
-                                    <option {{#equal employee.department "2"}} selected>Product Development{{/equal}}</option>
-                                    <option {{#equal employee.department "3"}} >Marketing{{/equal}}</option>
-                                    <option {{#equal employee.department "4"}} >Strategic Planning{{/equal}}</option>
-                                    <option {{#equal employee.department "5"}} >Accounting{{/equal}}</option>
-                                    <option {{#equal employee.department "6"}}>Human Resources{{/equal}}</option>
-                                    <option  {{#equal employee.department "7"}} >Quality Analysis{{/equal}}</option>
+                                    <option value="1" {{#equal employee.department "1"}} >Creative Services{{/equal}}</option>
+                                    <option value="2"{{#equal employee.department "2"}} selected>Product Development{{/equal}}</option>
+                                    <option value="3"{{#equal employee.department "3"}} >Marketing{{/equal}}</option>
+                                    <option value="4"{{#equal employee.department "4"}} >Strategic Planning{{/equal}}</option>
+                                    <option value="5"{{#equal employee.department "5"}} >Accounting{{/equal}}</option>
+                                    <option value="6"{{#equal employee.department "6"}}>Human Resources{{/equal}}</option>
+                                    <option  value="7"{{#equal employee.department "7"}} >Quality Analysis{{/equal}}</option>
                             </select>
                         </div>
                     </div>
