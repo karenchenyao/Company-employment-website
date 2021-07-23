@@ -103,9 +103,12 @@ app.get("/employees",(req,res)=>{
         }
         else {
             data.getAllEmployees().then((data)=>{
-                res.render("employees", {employees: data});
+                if(data.length()>0){
+                    res.render("employees", {employees: data});
+                }
+                else res.render("employees", {message: "no results"});
             }).catch((err)=>{
-                res.render({message:"no results"});
+                res.render({message:"There was a error!"});
             })
         }
 });
