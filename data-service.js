@@ -58,6 +58,7 @@ module.exports.getAllEmployees = function(){
 module.exports.getDepartments = function(){
     return new Promise((resolve, reject) => {
         Department.findAll().then(function(data){
+            data = data.map((value) => value.dataValues);
             resolve(data);
         }).catch((err)=>{
             reject("no results returned");
