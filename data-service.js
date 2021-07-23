@@ -118,7 +118,7 @@ module.exports.addEmployee = function(employeeData){
         for(const prop in employeeData){
             if (`employeeData.${prop} == ""`) `employeeData.${prop} = null`
         }
-        Employee.create(employeeData).then(function(data){
+        Employee.create().then(function(data){
             resolve(data);
         }).catch((err)=>{
             reject("error on addEmployee");
@@ -140,6 +140,19 @@ module.exports.updateEmployee = function(employeeData){
         }).catch((err)=>{
             reject("error on updateEmployee");
         })
+    });
+}
+
+module.exports.deleteEmployeeByNum = function(empNum){
+    return new Promise(function(resolve,reject){
+        Employee.destroy({
+            where: {employeeNum: empNum}
+        }).then(function(data){
+            resolve(data);
+        }).catch((err)=>{
+            console.err(err);
+            reject("employee destroy was rejected!")
+        });
     });
 }
 
@@ -195,5 +208,17 @@ module.exports.updateDepartment = function(departmentData){
         }).catch((err)=>{
             reject("error on updateDepartment function");
         })
+    });
+}
+module.exports.deleteDepartmentById = function(Id){
+    return new Promise(function(resolve,reject){
+        Department.destroy({
+            where: {departmentId: Id}
+        }).then(function(data){
+            resolve(data);
+        }).catch((err)=>{
+            console.err(err);
+            reject("department destroy was rejected!")
+        });
     });
 }

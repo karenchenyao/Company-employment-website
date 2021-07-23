@@ -189,6 +189,14 @@ app.post("/employee/update", (req, res) => {
     });
 });
 
+app.get("/employees/delete/:empNum",(req,res)=>{
+    data.deleteEmployeeByNum(req.params.empNum).then(()=>{
+        res.redirect("/employees")
+    }).catch((err)=>{
+            res.status(500).send("Unable to Remove Employee!");
+        });
+})
+
 app.get("/departments",(req,res)=>{
     data.getDepartments().then((data)=>{
         if(data.length >0){
@@ -231,6 +239,14 @@ app.post("/department/update", (req, res) => {
         res.redirect("/departments");
     });
 });
+
+app.get("/departments/delete/:Id",(req,res)=>{
+    data.deleteDepartmentById(req.params.Id).then(()=>{
+        res.redirect("/departments")
+    }).catch((err)=>{
+            res.status(500).send("Unable to Remove Department!");
+        });
+})
 
 app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
