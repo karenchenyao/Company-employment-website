@@ -103,10 +103,12 @@ app.get("/employees",(req,res)=>{
         }
         else {
             data.getAllEmployees().then((data)=>{
-                if(data.length()>0){
+                if(data.length >0){
                     res.render("employees", {employees: data});
                 }
-                else res.render("employees", {message: "no results"});
+                else {
+                    res.render("employees", {message: "no results"})
+                };
             }).catch((err)=>{
                 res.render({message:"There was a error!"});
             })
@@ -131,10 +133,15 @@ app.get("/managers",(req,res)=>{
 
 app.get("/departments",(req,res)=>{
     data.getDepartments().then((data)=>{
-        res.render("departments", {departments: data});
+        if(data.length >0){
+            res.render("departments", {departments: data});
+        }
+        else {
+            res.render("departments", {message: "no results"})
+        };
     }).catch((err)=>{
-        res.render({message: "no results"});
-    });
+        res.render({message:"There was a error!"});
+    })
 });
 
 app.get("/employees/add",(req,res)=>{
