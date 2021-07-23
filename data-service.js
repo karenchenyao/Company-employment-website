@@ -46,7 +46,6 @@ module.exports.initialize = function(){
 module.exports.getAllEmployees = function(){
     return new Promise((resolve, reject) => {
         Employee.findAll().then(function(data){
-            /*data = data.map((value) => value.dataValues); //pull the data(exclusively)*/
             resolve(data);
         }).catch((err)=>{
             reject("no results returned");
