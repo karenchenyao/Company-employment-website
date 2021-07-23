@@ -48,42 +48,16 @@ module.exports.getAllEmployees = function(){
         Employee.findAll().then(function(data){
             resolve(data);
         }).catch((err)=>{
-            reject("no results returned");
+            reject("err on getAllEmployees");
         })
     });
 
-}
-
-module.exports.getDepartments = function(){
-    return new Promise((resolve, reject) => {
-        Department.findAll().then(function(data){
-            resolve(data);
-        }).catch((err)=>{
-            console.error(err);
-            reject("no results returned");
-        });
-    });
 }
 
 module.exports.getManagers = function() {
     return new Promise((resolve, reject) => {
         reject();
     })
-}
-
-module.exports.addEmployee = function(employeeData){
-    return new Promise(function(resolve,reject){
-        employeeData.isManager=(employeeData.isManager)?true:false;
-        for(const prop in employeeData){
-            if (`employeeData.${prop} == ""`) `employeeData.${prop} = null`
-        }
-        Employee.create().then(function(data){
-            resolve(data);
-        }).catch((err)=>{
-            reject("no results returned");
-        })
-    });
-
 }
 
 module.exports.getEmployeesByStatus = function(statusData){
@@ -93,7 +67,7 @@ module.exports.getEmployeesByStatus = function(statusData){
         }).then(function(data){
             resolve(data)
         }).catch((err)=>{
-            reject("no results returned");
+            reject("error on getEmployeesByStatus");
         })
         
     })
@@ -106,7 +80,7 @@ module.exports.getEmployeesByDepartment = function(departmentData){
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{
-            reject("no results returned");
+            reject("error on getEmployeesByDepartment");
         })
       
     })
@@ -119,7 +93,7 @@ module.exports.getEmployeesByManager = function(manager){
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{
-            reject("no results returned");
+            reject("error on getEmployeesByManager");
         })
       
     })
@@ -130,12 +104,27 @@ module.exports.getEmployeeByNum = function(num){
         Employee.findAll({
             where:{employeeNum: num}
         }).then(function(data){
-            resolve(data);
+            resolve(data[0]);
         }).catch((err)=>{
-            reject("no results returned");
+            reject("error on getEmployeeByNum");
         })
       
     })
+}
+
+module.exports.addEmployee = function(employeeData){
+    return new Promise(function(resolve,reject){
+        employeeData.isManager=(employeeData.isManager)?true:false;
+        for(const prop in employeeData){
+            if (`employeeData.${prop} == ""`) `employeeData.${prop} = null`
+        }
+        Employee.create(employeeData).then(function(data){
+            resolve(data);
+        }).catch((err)=>{
+            reject("error on addEmployee");
+        })
+    });
+
 }
 
 module.exports.updateEmployee = function(employeeData){
@@ -149,7 +138,62 @@ module.exports.updateEmployee = function(employeeData){
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{
-            reject("no results returned");
+            reject("error on updateEmployee");
+        })
+    });
+}
+
+module.exports.getDepartments = function(){
+    return new Promise((resolve, reject) => {
+        Department.findAll().then(function(data){
+            resolve(data);
+        }).catch((err)=>{
+            console.error(err);
+            reject("err on getDepartments");
+        });
+    });
+}
+
+module.exports.getDepartmentById = function(id){
+    return new Promise(function(resolve,reject){
+        Department.findAll({
+            where:{departmentId: id}
+        }).then(function(data){
+            resolve(data[0]);
+        }).catch((err)=>{
+            reject("error on getDepartmentById function");
+        })
+      
+    })
+}
+
+module.exports.addDepartment = function(departmentData){
+    return new Promise(function(resolve,reject){
+        for(const prop in departmentData){
+            if (`departmentData.${prop} == ""`) {
+                `departmentData.${prop} = null`
+            }
+        }
+        Department.create(departmentData).then(function(data){
+            resolve(data);
+        }).catch((err)=>{
+            reject("error on addDepartment function");
+        })
+    });
+
+}
+
+module.exports.updateDepartment = function(departmentData){
+    return new Promise(function(resolve,reject){
+        for(const prop in departmentData){
+            if (`departmentData.${prop} == ""`) `departmentData.${prop} = null`
+        }
+        Department.update({
+            where:{departmentId:departmentData.departmentId}
+        }).then(function(data){
+            resolve(data);
+        }).catch((err)=>{
+            reject("error on updateDepartment function");
         })
     });
 }
