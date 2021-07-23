@@ -90,7 +90,7 @@ app.get("/employees",(req,res)=>{
             data.getEmployeesByDepartment(req.query.department).then((data)=>{
                 res.render("employees", {employees: data})
             }).catch((err)=>{
-                res.render({message:"no results"});
+                res.render({message:"error no results"});
             })
         }
         else
@@ -98,7 +98,7 @@ app.get("/employees",(req,res)=>{
             data.getEmployeesByManager(req.query.employees).then((data)=>{
                 res.render("employees", {employees: data})
             }).catch((err)=>{
-                res.render({message:"no results"});
+                res.render({message:"error no results"});
             })
         }
         else {
@@ -140,7 +140,8 @@ app.get("/departments",(req,res)=>{
             res.render("departments", {message: "no results"});
         }
     }).catch((err)=>{
-        res.render({message:"There was a error!"});
+        console.error(err);
+        //res.render(err);
     })
 });
 
@@ -184,3 +185,4 @@ data.initialize().then(function(){
 }).catch(function(err){
     console.log("Unable to start server: " + err);
 });
+

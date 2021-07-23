@@ -1,7 +1,7 @@
 const Sequelize=require('sequelize');
 
-var sequelize=new Sequelize('da246mgdmvdekn','ropiryahazegzv','9725170b6bb91620f43e1abd178022310a221cd049d4f61b919a04a02aa85257',{
-    host:'ec2-52-45-183-77.compute-1.amazonaws.com',
+var sequelize=new Sequelize('d5r19i8fmvqcvd','mlctfapmgjtdlu','00f7b5bd9c9e378a46a37d46dacc58723f606cfa4e141347fbe649a599f225ba',{
+    host:'ec2-52-23-40-80.compute-1.amazonaws.com',
     dialect:'postgres',
     port:5432,
     dialectOptions:{
@@ -39,8 +39,8 @@ module.exports.initialize = function(){
         }).catch((err)=> {
             reject("unable to sync with the database")}
     
-         )
-    })
+         );
+    });
 }
 
 module.exports.getAllEmployees = function(){
@@ -57,11 +57,11 @@ module.exports.getAllEmployees = function(){
 module.exports.getDepartments = function(){
     return new Promise((resolve, reject) => {
         Department.findAll().then(function(data){
-            data = data.map((value) => value.dataValues);
             resolve(data);
         }).catch((err)=>{
+            console.error(err);
             reject("no results returned");
-        })
+        });
     });
 }
 
