@@ -137,8 +137,8 @@ app.get("/departments",(req,res)=>{
             res.render("departments", {departments: data});
         }
         else {
-            res.render("departments", {message: "no results"})
-        };
+            res.render("departments", {message: "no results"});
+        }
     }).catch((err)=>{
         res.render({message:"There was a error!"});
     })
