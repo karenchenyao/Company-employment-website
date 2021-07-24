@@ -248,7 +248,8 @@ app.get("/department/:depId",(req,res)=>{
     data.getDepartmentById(req.params.depId).then((data)=>{
 
         if (data.length > 0) {
-            res.render("department", {department: data[0]});
+            console.log(data.length);
+            res.render("department", {department: data});
         }
         else {
             
