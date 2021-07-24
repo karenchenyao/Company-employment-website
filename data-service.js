@@ -118,9 +118,10 @@ module.exports.addEmployee = function(employeeData){
         for(const prop in employeeData){
             if (`employeeData.${prop} == ""`) `employeeData.${prop} = null`
         }
-        Employee.create().then(function(data){
+        Employee.create(employeeData).then(function(data){
             resolve(data);
         }).catch((err)=>{
+            console.err(err);
             reject("error on addEmployee");
         })
     });
@@ -217,7 +218,7 @@ module.exports.deleteDepartmentById = function(depId){
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{
-            console.err(err);
+            console.error(err);
             reject("department destroy was rejected!")
         });
     });
