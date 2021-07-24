@@ -104,6 +104,8 @@ module.exports.getEmployeeByNum = function(num){
         Employee.findAll({
             where:{employeeNum: num}
         }).then(function(data){
+            console.log(typeof(data));
+            console.log(data.length);
             resolve(data[0]);
         }).catch((err)=>{
             reject("error on getEmployeeByNum");
@@ -175,14 +177,24 @@ module.exports.getDepartments = function(){
 
 module.exports.getDepartmentById = function(depId){
     return new Promise(function(resolve,reject){
-        Department.findAll({
-            where:{departmentId: depId}
-        }).then(function(data){
-            resolve(data[0]);
-        }).catch((err)=>{
-            reject("error on getDepartmentById function");
-        })
-      
+            Department.findAll({
+                where:{departmentId: depId}
+            }).then(function(data){
+                console.log("mark1");
+                console.log(data.length);
+                if(data.length > 0){
+                    console.log("mark2"); 
+                    console.log(data.length);
+                data = data.map(value => value);
+                resolve(data[0]);
+            }else{
+                console.log("mark3");
+                console.log(data.length);
+                reject("cannot find Department");} 
+            }).catch((err)=>{
+                reject("error on getDepartmentById function");
+            })
+    
     })
 }
 
