@@ -188,9 +188,9 @@ module.exports.getDepartmentById = function(depId){
 
 module.exports.addDepartment = function(departmentData){
     return new Promise(function(resolve,reject){
-        for(const prop in departmentData){
-            if (`departmentData.${prop} == ""`) {
-                `departmentData.${prop} = null`
+        for(var prop in employeeData){
+            if (employeeData.prop == "") {
+                employeeData.prop = null;
             }
         }
         Department.create(departmentData).then(function(data){
@@ -204,10 +204,12 @@ module.exports.addDepartment = function(departmentData){
 
 module.exports.updateDepartment = function(departmentData){
     return new Promise(function(resolve,reject){
-        for(const prop in departmentData){
-            if (`departmentData.${prop} == ""`) `departmentData.${prop} = null`
+        for(var prop in departmentData){
+            if (departmentData.prop == ""){
+                departmentData.prop = null 
+            } 
         }
-        Department.update({
+        Department.update(departmentData,{
             where:{departmentId:departmentData.departmentId}
         }).then(function(data){
             resolve(data);

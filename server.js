@@ -225,14 +225,14 @@ app.get("/departments",(req,res)=>{
 
 app.get("/department/:depId",(req,res)=>{
     data.getDepartmentById(req.params.depId).then((data)=>{
-        if (data.length() > 0) {
+        if (data.length > 0) {
             res.render("department", {department: data});
         }
         else {
             res.status(404).send("Department Not Found");
         }
     }).catch((err)=>{
-        console.err(err);
+        console.error(err);
         res.status(404).send("Error on getDepartmentByID route");
     });
 })
