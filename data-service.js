@@ -167,10 +167,10 @@ module.exports.getDepartments = function(){
     });
 }
 
-module.exports.getDepartmentById = function(id){
+module.exports.getDepartmentById = function(depId){
     return new Promise(function(resolve,reject){
         Department.findAll({
-            where:{departmentId: id}
+            where:{departmentId: depId}
         }).then(function(data){
             resolve(data[0]);
         }).catch((err)=>{
@@ -210,10 +210,10 @@ module.exports.updateDepartment = function(departmentData){
         })
     });
 }
-module.exports.deleteDepartmentById = function(Id){
+module.exports.deleteDepartmentById = function(depId){
     return new Promise(function(resolve,reject){
         Department.destroy({
-            where: {departmentId: Id}
+            where: {departmentId: depId}
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{

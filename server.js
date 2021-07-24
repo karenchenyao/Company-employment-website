@@ -111,7 +111,13 @@ app.get("/employees",(req,res)=>{
         else
         if (req.query.department){
             data.getEmployeesByDepartment(req.query.department).then((data)=>{
-                res.render("employees", {employees: data})
+                if (data.length > 0){
+                    res.render("employees", {employees: data})
+                }
+                else {
+                    res.render("employees", {message: "no results"})
+                }
+    
             }).catch((err)=>{
                 res.render({message:"error on getEmployeesByDepartment route"});
             })
@@ -130,7 +136,7 @@ app.get("/employees",(req,res)=>{
                     res.render("employees", {employees: data});
                 }
                 else {
-                    res.render("employees", {message: "no results for Employee table"})
+                    res.render("employees", {message: "no results"})
                 };
             }).catch((err)=>{
                 res.render({message:"error on getAllEmployees route"});
@@ -170,7 +176,7 @@ app.get("/employee/:empNum",(req,res)=>{
 })
 
 app.get("/employees/add",(req,res)=>{
-    res.render("getDepartments").then(()=>{
+    data.getDepartments().then(()=>{
         res.render("addEmployee",{departments:data}).catch(()=>{
             res.render("addEmployee",{departments: []});
         })
@@ -211,15 +217,16 @@ app.get("/departments",(req,res)=>{
     })
 });
 
-app.get("/department/:departmentId",(req,res)=>{
-    data.getDepartmentById(req.params.id).then((data)=>{
-        if (data.length > 0) {
+app.get("/department/:depId",(req,res)=>{
+    data.getDepartmentById(req.params.depId).then((data)=>{
+        if (data.length() > 0) {
             res.render("department", {department: data});
         }
         else {
             res.status(404).send("Department Not Found");
         }
     }).catch((err)=>{
+        console.err(err);
         res.status(404).send("Error on getDepartmentByID route");
     });
 })
@@ -240,8 +247,8 @@ app.post("/department/update", (req, res) => {
     });
 });
 
-app.get("/departments/delete/:Id",(req,res)=>{
-    data.deleteDepartmentById(req.params.Id).then(()=>{
+app.get("/departments/delete/:depId",(req,res)=>{
+    data.deleteDepartmentById(req.params.depId).then(()=>{
         res.redirect("/departments")
     }).catch((err)=>{
             res.status(500).send("Unable to Remove Department!");
