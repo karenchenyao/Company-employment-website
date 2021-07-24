@@ -88,10 +88,10 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="department">Department</label>
-                            {{if viewData.departments}}
+                            {{#if viewData.departments}}
                                 <select class="form-control" name="department" id="department">
                                  {{#each viewData.departments}}
-                                    <option value="departmentId"{{#if selected}} selected {{/if}}>{{departmentName}}</option>   
+                                    <option value="{{departmentId}}"{{#if selected}} selected {{/if}}>{{departmentName}}</option>   
                                 {{/each}}
                                 </select>
                             {{else}}

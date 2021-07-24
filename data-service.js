@@ -115,13 +115,15 @@ module.exports.getEmployeeByNum = function(num){
 module.exports.addEmployee = function(employeeData){
     return new Promise(function(resolve,reject){
         employeeData.isManager=(employeeData.isManager)?true:false;
-        for(const prop in employeeData){
-            if (`employeeData.${prop} == ""`) `employeeData.${prop} = null`
+        for( var prop in employeeData){
+            if (employeeData.prop == "") {
+                employeeData.prop = null
+            }
         }
         Employee.create(employeeData).then(function(data){
             resolve(data);
         }).catch((err)=>{
-            console.err(err);
+            console.error(err);
             reject("error on addEmployee");
         })
     });
@@ -131,14 +133,17 @@ module.exports.addEmployee = function(employeeData){
 module.exports.updateEmployee = function(employeeData){
     return new Promise(function(resolve,reject){
         employeeData.isManager=(employeeData.isManager)?true:false;
-        for(const prop in employeeData){
-            if (`employeeData.${prop} == ""`) `employeeData.${prop} = null`
+        for(var prop in employeeData){
+            if (employeeData.prop == "") {
+                employeeData.prop = null;
+            }
         }
-        Employee.update({
-            where:{employeeNum:employeeData.employeeNum}
+        Employee.update(employeeData,
+            {where:{employeeNum:employeeData.employeeNum}
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{
+            console.error(err);
             reject("error on updateEmployee");
         })
     });
@@ -151,7 +156,7 @@ module.exports.deleteEmployeeByNum = function(empNum){
         }).then(function(data){
             resolve(data);
         }).catch((err)=>{
-            console.err(err);
+            console.error(err);
             reject("employee destroy was rejected!")
         });
     });

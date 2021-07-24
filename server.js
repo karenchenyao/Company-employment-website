@@ -147,7 +147,7 @@ app.get("/employees",(req,res)=>{
 app.get("/employee/:empNum",(req,res)=>{
     let viewData = {};
 
-    dataService.getEmployeeByNum(req.params.empNum).then((data)=>{
+    data.getEmployeeByNum(req.params.empNum).then((data)=>{
         if(data){
             viewData.employee=data;
         }else{
@@ -155,7 +155,7 @@ app.get("/employee/:empNum",(req,res)=>{
         }
     }).catch(()=>{
         viewData.employee=null;
-    }).then(dataService.getDepartments).then((data)=>{
+    }).then(data.getDepartments).then((data)=>{
         viewData.departments=data;
 
         for(let i=0; i<viewData.departments.length;i++){
@@ -176,12 +176,18 @@ app.get("/employee/:empNum",(req,res)=>{
 })
 
 app.get("/employees/add",(req,res)=>{
-    data.getDepartments().then(()=>{
-        res.render("addEmployee",{departments:data}).catch(()=>{
-            res.render("addEmployee",{departments: []});
+    data.getDepartments().then((data)=>{
+        if (data.length > 0){
+            res.render("addEmployee",{departments:data})
+        }
+        else{
+            res.render("addEmployee",{departments: []})
+        }
+        }).catch((err)=>{
+            console.error(err);
+            res.render("error on addEmployee route")
         })
     });
-});
 
 app.post("/employees/add", (req,res)=>{
         data.addEmployee(req.body).then(()=>{
