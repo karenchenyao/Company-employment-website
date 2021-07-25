@@ -223,33 +223,12 @@ app.get("/departments",(req,res)=>{
     })
 });
 
-/*app.get("/department/:depId",(req,res)=>{
-    data.getDepartmentById(req.params.depId).then((data)=>{
-
-        if (data.length > 0) {
-            console.log("mark4");
-            console.log(data.length);
-            data = data.map(value => value);
-            res.render("department", {department: data});
-        }
-        else {
-            //res.status(404).send("Department Not Found");
-            console.log("mark5");
-            console.log(data.length);
-            res.status(404).send("Department Not Found");
-        }
-    }).catch((err)=>{
-        console.error(err);
-        res.status(404).send("Error on getDepartmentByID route");
-    });
-})*/
 
 app.get("/department/:depId",(req,res)=>{
     data.getDepartmentById(req.params.depId).then((data)=>{
 
         if (data.length > 0) {
-            console.log(data.length);
-            res.render("department", {department: data});
+            res.render("department", {department: data[0]});
         }
         else {
             
