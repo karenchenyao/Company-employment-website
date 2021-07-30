@@ -104,8 +104,6 @@ module.exports.getEmployeeByNum = function(num){
         Employee.findAll({
             where:{employeeNum: num}
         }).then(function(data){
-            console.log(typeof(data));
-            console.log(data.length);
             resolve(data[0]);
         }).catch((err)=>{
             reject("error on getEmployeeByNum");
@@ -190,13 +188,12 @@ module.exports.getDepartmentById = function(depId){
 
 module.exports.addDepartment = function(departmentData){
     return new Promise(function(resolve,reject){
-        for(var prop in employeeData){
-            if (employeeData.prop == "") {
-                employeeData.prop = null;
+        for(var prop in departmentData){
+            if (departmentData.prop == "") {
+                departmentData.prop = null;
             }
         }
         Department.create(departmentData).then(function(data){
-            console.log(data.length);
             resolve(data);
         }).catch((err)=>{
             reject("error on addDepartment function");

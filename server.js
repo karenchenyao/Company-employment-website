@@ -123,8 +123,8 @@ app.get("/employees",(req,res)=>{
             })
         }
         else
-        if(req.query.employees){
-            data.getEmployeesByManager(req.query.employees).then((data)=>{
+        if(req.query.manager){
+            data.getEmployeesByManager(req.query.manager).then((data)=>{
                 res.render("employees", {employees: data})
             }).catch((err)=>{
                 res.render({message:"error on getEmployeesByManager route"});
@@ -247,7 +247,6 @@ app.get("/departments/add",(req,res)=>{
 
 app.post("/departments/add", (req,res)=>{
         data.addDepartment(req.body).then(()=>{
-            console.log(data.length);
             res.redirect("/departments");
         })
 });
