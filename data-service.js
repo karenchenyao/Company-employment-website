@@ -116,8 +116,8 @@ module.exports.addEmployee = function(employeeData){
     return new Promise(function(resolve,reject){
         employeeData.isManager=(employeeData.isManager)?true:false;
         for( var prop in employeeData){
-            if (employeeData.prop == "") {
-                employeeData.prop = null
+            if (employeeData[prop] == '') {
+                employeeData[prop] = null
             }
         }
         Employee.create(employeeData).then(function(data){
@@ -189,8 +189,8 @@ module.exports.getDepartmentById = function(depId){
 module.exports.addDepartment = function(departmentData){
     return new Promise(function(resolve,reject){
         for(var prop in departmentData){
-            if (departmentData.prop == "") {
-                departmentData.prop = null;
+            if (departmentData[prop] == '') {
+                departmentData[prop] = null;
             }
         }
         Department.create(departmentData).then(function(data){
@@ -205,8 +205,8 @@ module.exports.addDepartment = function(departmentData){
 module.exports.updateDepartment = function(departmentData){
     return new Promise(function(resolve,reject){
         for(var prop in departmentData){
-            if (departmentData.prop == ""){
-                departmentData.prop = null 
+            if (departmentData[prop] == ''){
+                departmentData[prop] = null 
             } 
         }
         Department.update(departmentData,{
