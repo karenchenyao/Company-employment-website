@@ -134,8 +134,8 @@ module.exports.updateEmployee = function(employeeData){
     return new Promise(function(resolve,reject){
         employeeData.isManager=(employeeData.isManager)?true:false;
         for(var prop in employeeData){
-            if (employeeData.prop == "") {
-                employeeData.prop = null;
+            if (employeeData[prop] == '') {
+                employeeData[prop] = null;
             }
         }
         Employee.update(employeeData,
