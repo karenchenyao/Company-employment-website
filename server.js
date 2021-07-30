@@ -247,6 +247,7 @@ app.get("/departments/add",(req,res)=>{
 
 app.post("/departments/add", (req,res)=>{
         data.addDepartment(req.body).then(()=>{
+            console.log(data.length);
             res.redirect("/departments");
         })
 });

@@ -196,6 +196,7 @@ module.exports.addDepartment = function(departmentData){
             }
         }
         Department.create(departmentData).then(function(data){
+            console.log(data.length);
             resolve(data);
         }).catch((err)=>{
             reject("error on addDepartment function");
