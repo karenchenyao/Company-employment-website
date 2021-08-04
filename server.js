@@ -328,7 +328,7 @@ app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname, "/views/404.html"));
 });
 
-dataService.initialize()
+data.initialize()
 .then(dataServiceAuth.initialize)
 .then(function(){
     app.listen(HTTP_PORT,function(){
