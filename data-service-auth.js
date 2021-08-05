@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt =require('bcryptjs');
 
 let Schema = mongoose.Schema;
 
@@ -14,11 +15,14 @@ let userSchema = new Schema ({
 
 let User;
 
+const uri = "mongodb+srv://YChen:Gilbert02/@senecaweb.chmg8.mongodb.net/web322a6?retryWrites=true&w=majority";
+
 module.exports.initialize = function(){
     return new Promise(function(resolve,reject){
-        let db = mongoose.createConnection("mongodb+srv://YChen:Gilbert02/@senecaweb322.rm5hi.mongodb.net/web322-a6?retryWrites=true&w=majority");
+        let db = mongoose.createConnection(uri);
 
         db.on('error',(err)=>{
+            console.error(err);
             reject(err);
         });
         db.once('open',()=>{
@@ -33,18 +37,32 @@ module.exports.registerUser = function(userData) {
         if(userData.password != userData.password2){
             reject("Passwords do not match");
         }else{
-            let newUser = new User(userData);
-            newUser.save((err)=>{
-                if(err){
-                    if(err.code == 11000){
-                        reject("User Name already taken");
-                    }else{
-                        reject("There was an error creating the user: " + err);
-                    }
+            bcrypt.genSalt(10,function(err,salt){
+                if (err){
+                    reject ("There was an error encrypting the password");
                 }else{
-                    resolve();
+                    bcrypt.hash(userData.password, salt,function(err,hash){
+                        if (err){
+                            reject("There was an error encrypting the password");
+                        }else{
+                            userData.password=hash;
+                            let newUser = new User(userData);
+                            newUser.save((err)=>{
+                                if(err){
+                                    if(err.code == 11000){
+                                        reject("User Name already taken");
+                                    }else{
+                                        reject("There was an error creating the user: " + err);
+                                    }
+                                }else{
+                                    resolve();
+                                };
+                            });
+                        };
+                    });
                 };
             });
+            
         };
     });
 };
