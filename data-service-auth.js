@@ -15,11 +15,11 @@ let userSchema = new Schema ({
 
 let User;
 
-const uri = "mongodb+srv://YChen:YChen@web322.76qlj.mongodb.net/web322_a6?retryWrites=true&w=majority";
+const url = "mongodb+srv://YChen:YChen@web322.76qlj.mongodb.net/web322_a6?retryWrites=true&w=majority";
 
 module.exports.initialize = function(){
     return new Promise(function(resolve,reject){
-        let db = mongoose.createConnection(uri,{useNewUrlParser: true, useUnifiedTopology: true});
+        let db = mongoose.createConnection(url,{useNewUrlParser: true, useUnifiedTopology: true});
 
         db.on('error',(err)=>{
             console.error(err);
