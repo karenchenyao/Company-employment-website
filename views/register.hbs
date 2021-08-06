@@ -5,6 +5,11 @@
         <h2>Register</h2>
         <hr />
 
+         {{#if successMessage }}
+        <div class="alert alert-success"> <strong>Success:</strong> {{successMessage}}</div>
+        <a class="btn btn-success pull-right" href="/login">&nbsp;&nbsp;&nbsp;Proceed to Log in&nbsp;&nbsp;&nbsp;</a><br /><br /><br />
+        {{else}}
+
          {{#if errorMessage}}
         <div class="alert alert-danger"><strong>Error:</strong>{{errorMessage}}</div>
         {{/if}}
@@ -41,10 +46,6 @@
             </div>
             <input type="submit" class="btn btn-success pull-right" value="Register" />
         </form>
-        
-        {{#if successMessage }}
-        <div class="alert alert-success"> <strong>Success:</strong> {{successMessage}}</div>
-        <a class="btn btn-success pull-right" href="/login">&nbsp;&nbsp;&nbsp;Proceed to Log in&nbsp;&nbsp;&nbsp;</a><br /><br /><br />
         {{/if}}
 
     </div>

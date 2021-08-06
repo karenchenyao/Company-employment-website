@@ -15,11 +15,11 @@ let userSchema = new Schema ({
 
 let User;
 
-const uri = "mongodb+srv://YChen:Gilbert02/@senecaweb.chmg8.mongodb.net/web322a6?retryWrites=true&w=majority";
+const uri = "mongodb+srv://YChen:YChen@web322.76qlj.mongodb.net/web322_a6?retryWrites=true&w=majority";
 
 module.exports.initialize = function(){
     return new Promise(function(resolve,reject){
-        let db = mongoose.createConnection(uri);
+        let db = mongoose.createConnection(uri,{useNewUrlParser: true, useUnifiedTopology: true});
 
         db.on('error',(err)=>{
             console.error(err);
@@ -79,7 +79,7 @@ module.exports.checkUser = function(userData){
                 .then((res)=>{
                     if (res == true){
                         users[0].loginHistory.push({dateTime:(new Date()).toString(),userAgent:userData.userAgent});
-                        User.update({userName:user[0].userName},
+                        User.update({userName:users[0].userName},
                         {$set: {loginHistory: users[0].loginHistory}},
                         {multi:false})
                         .exec()
