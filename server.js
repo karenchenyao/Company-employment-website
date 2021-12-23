@@ -5,8 +5,8 @@
 * (including 3rd party web sites) or distributed to other students.
 * 
 * Name: __Yao Chen________ Student ID: ____134082197_________ Date: ____August 4 2021_______
-*
-* Online (Heroku) Link: ______https://ychen-569.herokuapp.com/___________________
+*https://ychen-569.herokuapp.com/
+* Online (Heroku) Link: _________________________
 *
 ********************************************************************************/
 
